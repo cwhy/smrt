@@ -3,18 +3,14 @@ import numpy as np
 import itertools as it 
 
 
-np.random.seed(3)
+N = 10
 seq = "SMRT"
 L = len(seq)
-N = 10
-# Use number 0,1,2,3 as S,M,R,T
-Table = np.random.random_integers(0,L-1,size=(N,N))
-Table2 = np.chararray((N,N))
+index_seq = dict(zip(seq, range(L)))
+Table = np.readtxt(seq+".txt")
+print(Table)
 Result = []
-for i in range(N):
-    for j in range(N):
-        Table2[i,j] = seq[Table[i,j]]
-np.savetxt("smrt.txt", Table2, fmt="%s")
+# Use number 0,1,2,3 as S,M,R,T
 
 def check(iUL,iUR,iBL,iBR):
     if iUR-iUL % 4 != 1:

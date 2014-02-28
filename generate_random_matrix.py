@@ -6,7 +6,6 @@ import itertools as it
 np.random.seed(3)
 def generate(seq,N):
     L = len(seq)
-    # Use number 0,1,2,3 as S,M,R,T
     Table = np.random.random_integers(0,L-1,size=(N,N))
     Table2 = np.chararray((N,N))
     for i in range(N):
