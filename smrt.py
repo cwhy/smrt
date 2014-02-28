@@ -1,38 +1,33 @@
 from __future__ import print_function
 import numpy as np
+import itertools as it 
 
 
-seq = list("SMRT")
+np.random.seed(3)
+seq = "SMRT"
 L = len(seq)
-index_seq = dict(zip(seq, range(L)))
-N = 100
-Table = []
-for i in range(N):
-    Table.append([])
-for i in range(N):
-    for j in range(N):
-        c = seq[np.random.random_integers(0,L-1)]
-        Table[j].append(c)
-#for line in Table:
-#    print(line,sep='\n')
-
-
-def checkseq(i,j):
-        return True
-
+N = 10
+# Use number 0,1,2,3 as S,M,R,T
+Table = np.random.random_integers(0,L-1,size=(N,N))
+print(Table,sep='\n')
 Result = []
-for i in range(N-1):
-    for j in range(N-1):
-        iUL = index_seq[Table[i][j]]
-        iUR = index_seq[Table[i][j+1]]
-        iBL = index_seq[Table[i+1][j]]
-        iBR = index_seq[Table[i+1][j+1]]
-        if iUR-iUL % 4 != 1:
-            continue
-        elif iBR-iUR % 4 != 1:
-            continue
-        elif iBL-iBR % 4 != 1:
-            continue
-        elif iUL-iBL % 4 != 1:
-            Result.append((i,j))
+
+def check(iUL,iUR,iBL,iBR):
+    if iUR-iUL % 4 != 1:
+        return False
+    elif iBR-iUR % 4 != 1:
+        return False
+    elif iBL-iBR % 4 != 1:
+        return False
+    elif iUL-iBL % 4 != 1:
+        return True
+        
+coords = list(it.product(range(N-1), range(N-1)))
+for (i,j) in coords:
+    iUL = Table[i,j]
+    iUR = Table[i,j+1]
+    iBL = Table[i+1,j]
+    iBR = Table[i+1,j+1]
+    if check(iUL,iUR,iBL,iBR):
+        Result.append((i,j))
 print(Result)
