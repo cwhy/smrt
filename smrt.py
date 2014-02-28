@@ -16,10 +16,10 @@ print(Table)
 
 
 def checkseq(i,j):
-    iUL = index_seq(Table[i][j])
-    iUR = index_seq(Table[i][j+1])
-    iBL = index_seq(Table[i+1][j])
-    iBR = index_seq(Table[i+1][j+1])
+    iUL = index_seq[Table[i][j]]
+    iUR = index_seq[Table[i][j+1]]
+    iBL = index_seq[Table[i+1][j]]
+    iBR = index_seq[Table[i+1][j+1]]
     if iUR-iUL % 4 != 1:
         return False
     elif iBR-iUR % 4 != 1:
@@ -35,3 +35,4 @@ for i in range(N-1):
 for i in range(N-1):
     for j in range(N-1):
         Result[i].append(checkseq(i,j))
+print(Result)
